@@ -1,0 +1,311 @@
+% =====================================================================
+% Preamble per "Basi di Dati - Modulo 2"
+% Adattato dal template Strutture Discrete
+% =====================================================================
+
+\usepackage{name}
+
+\raggedbottom
+\setlength{\headheight}{14.5pt}
+
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepackage{amsthm}
+\usepackage{mdframed}
+\usepackage[most]{tcolorbox}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{microtype}
+\usepackage{booktabs}
+\usetikzlibrary{calc}
+
+% --- Definizione Colori (codice) ---
+\definecolor{backcolour}{RGB}{250, 250, 250}
+\definecolor{framegray}{RGB}{220, 220, 220}
+\definecolor{codeblue}{RGB}{0, 0, 139}
+\definecolor{codegreen}{RGB}{0, 100, 100}
+\definecolor{codegray}{RGB}{128, 128, 128}
+\definecolor{numgray}{RGB}{180, 180, 180}
+
+% --- Stile Codice ---
+\lstdefinestyle{exactstyle}{
+    language=C,
+    backgroundcolor=\color{backcolour},
+    commentstyle=\upshape\color{codegray},
+    keywordstyle=\bfseries\color{codeblue},
+    stringstyle=\color{codegreen},
+    basicstyle=\ttfamily\small\upshape,
+    breakatwhitespace=false,
+    breaklines=true,
+    keepspaces=true,
+    numbers=left,
+    numbersep=15pt,
+    numberstyle=\tiny\color{numgray},
+    showspaces=false,
+    showstringspaces=false,
+    showtabs=false,
+    tabsize=4,
+    frame=none,
+    xleftmargin=25pt,
+}
+\lstset{style=exactstyle}
+
+% --- Box Strategia ---
+\newtcolorbox{strategiabox}{
+  colback=white!3,
+  colframe=black,
+  boxrule=0.8pt,
+  title=\textbf{Metodologia risolutiva proposta:},
+  fonttitle=\bfseries,
+  colbacktitle=white!15,
+  coltitle=black
+}
+\newcommand{\strategia}[1]{%
+  \begin{strategiabox}
+    #1
+  \end{strategiabox}
+}
+
+% --- Theorem-like ambienti semplici ---
+\newtheorem{esempio}{Esempio}[chapter]
+\newtheorem{osservazione}{Osservazione}[chapter]
+
+% --- Colori per i box dei teoremi ---
+\definecolor{defscol}{HTML}{ecd8d7}
+\definecolor{asumscol}{HTML}{ecd8d7}
+\definecolor{rmkscol}{HTML}{313160}
+\definecolor{exmscol}{HTML}{e04b52}
+\definecolor{lemscol}{HTML}{2c3943}
+\definecolor{thmscol}{HTML}{595765}
+\definecolor{prpscol}{HTML}{9c98b1}
+\definecolor{corscol}{HTML}{dfd9fd}
+\definecolor{clmscol}{HTML}{165c58}
+\definecolor{facscol}{HTML}{28a8a1}
+
+% ============================
+% Definizione
+% ============================
+\newtcbtheorem[number within=section]{mydefinition}{Definizione}{
+    enhanced, frame hidden, titlerule=0mm, toptitle=1mm, bottomtitle=1mm,
+    fonttitle=\bfseries\large, coltitle=black,
+    colbacktitle=defscol!40!white, colback=defscol!20!white,
+}{defn}
+\NewDocumentCommand{\defn}{m+m}{\begin{mydefinition}{#1}{}#2\end{mydefinition}}
+\NewDocumentCommand{\defnr}{mm+m}{\begin{mydefinition}{#1}{#2}#3\end{mydefinition}}
+
+% ============================
+% Proprietà
+% ============================
+\newtcbtheorem[number within=section]{mypropi}{Proprietà}{
+    enhanced, frame hidden, titlerule=0mm, toptitle=1mm, bottomtitle=1mm,
+    fonttitle=\bfseries\large, coltitle=black,
+    colbacktitle=blue!40!white, colback=blue!20!white,
+}{propi}
+\NewDocumentCommand{\propi}{m+m}{
+    \begin{mypropi}{#1}{}\begin{itemize}#2\end{itemize}\end{mypropi}
+}
+
+% ============================
+% Assunzione
+% ============================
+\newtcbtheorem[use counter from=mydefinition]{myassumption}{Assunzione}{
+    enhanced, frame hidden, titlerule=0mm, toptitle=1mm, bottomtitle=1mm,
+    fonttitle=\bfseries\large, coltitle=black,
+    colbacktitle=asumscol!40!white, colback=asumscol!20!white,
+}{asum}
+\NewDocumentCommand{\asum}{m+m}{\begin{myassumption}{#1}{}#2\end{myassumption}}
+\NewDocumentCommand{\asumr}{mm+m}{\begin{myassumption}{#1}{#2}#3\end{myassumption}}
+
+% ============================
+% Teorema
+% ============================
+\newtcbtheorem[number within=section]{mytheorem}{Teorema}{
+    enhanced, frame hidden, titlerule=0mm, toptitle=1mm, bottomtitle=1mm,
+    fonttitle=\bfseries\large, coltitle=black,
+    colbacktitle=thmscol!40!white, colback=thmscol!20!white,
+}{thm}
+\NewDocumentCommand{\thm}{m+m}{\begin{mytheorem}{#1}{}#2\end{mytheorem}}
+\NewDocumentCommand{\thmr}{mm+m}{\begin{mytheorem}{#1}{#2}#3\end{mytheorem}}
+
+\newenvironment{thmpf}{
+    {\noindent{\it \textbf{Dimostrazione.}}}
+    \tcolorbox[blanker,breakable,left=5mm,parbox=false,
+    before upper={\parindent15pt}, after skip=10pt,
+    borderline west={1mm}{0pt}{thmscol!40!white}]
+}{
+    \textcolor{thmscol!40!white}{\hbox{}\nobreak\hfill$\blacksquare$}
+    \endtcolorbox
+}
+\NewDocumentCommand{\thmp}{m+m+m}{
+    \begin{mytheorem}{#1}{}#2\end{mytheorem}
+    \begin{thmpf}#3\end{thmpf}
+}
+
+% ============================
+% Lemma
+% ============================
+\newtcbtheorem[use counter from=mydefinition]{mylemma}{Lemma}{
+    enhanced, frame hidden, titlerule=0mm, toptitle=1mm, bottomtitle=1mm,
+    fonttitle=\bfseries\large, coltitle=black,
+    colbacktitle=lemscol!40!white, colback=lemscol!20!white,
+}{lem}
+\NewDocumentCommand{\lem}{m+m}{\begin{mylemma}{#1}{}#2\end{mylemma}}
+
+\newenvironment{lempf}{
+    {\noindent{\it \textbf{Dimostrazione del Lemma.}}}
+    \tcolorbox[blanker,breakable,left=5mm,parbox=false,
+    before upper={\parindent15pt}, after skip=10pt,
+    borderline west={1mm}{0pt}{lemscol!40!white}]
+}{
+    \textcolor{lemscol!40!white}{\hbox{}\nobreak\hfill$\blacksquare$}
+    \endtcolorbox
+}
+\NewDocumentCommand{\lemp}{m+m+m}{
+    \begin{mylemma}{#1}{}#2\end{mylemma}
+    \begin{lempf}#3\end{lempf}
+}
+
+% ============================
+% Corollario
+% ============================
+\newtcbtheorem[use counter from=mydefinition]{mycorollary}{Corollario}{
+    enhanced, frame hidden, titlerule=0mm, toptitle=1mm, bottomtitle=1mm,
+    fonttitle=\bfseries\large, coltitle=black,
+    colbacktitle=corscol!40!white, colback=corscol!20!white,
+}{cor}
+\NewDocumentCommand{\cor}{+m}{\begin{mycorollary}{}{}#1\end{mycorollary}}
+
+\newenvironment{corpf}{
+    {\noindent{\it \textbf{Dimostrazione del Corollario.}}}
+    \tcolorbox[blanker,breakable,left=5mm,parbox=false,
+    before upper={\parindent15pt}, after skip=10pt,
+    borderline west={1mm}{0pt}{corscol!40!white}]
+}{
+    \textcolor{corscol!40!white}{\hbox{}\nobreak\hfill$\blacksquare$}
+    \endtcolorbox
+}
+\NewDocumentCommand{\corp}{m+m+m}{
+    \begin{mycorollary}{}{}#1\end{mycorollary}
+    \begin{corpf}#2\end{corpf}
+}
+
+% ============================
+% Proposizione
+% ============================
+\newtcbtheorem[use counter from=mydefinition]{myproposition}{Proposizione}{
+    enhanced, frame hidden, titlerule=0mm, toptitle=1mm, bottomtitle=1mm,
+    fonttitle=\bfseries\large, coltitle=black,
+    colbacktitle=prpscol!30!white, colback=prpscol!20!white,
+}{prop}
+\NewDocumentCommand{\prop}{+m}{\begin{myproposition}{}{}#1\end{myproposition}}
+
+\newenvironment{proppf}{
+    {\noindent{\it \textbf{Dimostrazione.}}}
+    \tcolorbox[blanker,breakable,left=5mm,parbox=false,
+    before upper={\parindent15pt}, after skip=10pt,
+    borderline west={1mm}{0pt}{prpscol!40!white}]
+}{
+    \textcolor{prpscol!40!white}{\hbox{}\nobreak\hfill$\blacksquare$}
+    \endtcolorbox
+}
+\NewDocumentCommand{\propp}{+m+m}{
+    \begin{myproposition}{}{}#1\end{myproposition}
+    \begin{proppf}#2\end{proppf}
+}
+
+% ============================
+% Claim
+% ============================
+\newtcbtheorem[use counter from=mydefinition]{myclaim}{Claim}{
+    enhanced, frame hidden, titlerule=0mm, toptitle=1mm, bottomtitle=1mm,
+    fonttitle=\bfseries\large, coltitle=black,
+    colbacktitle=clmscol!40!white, colback=clmscol!20!white,
+}{clm}
+\NewDocumentCommand{\clm}{m+m}{\begin{myclaim*}{#1}{}#2\end{myclaim*}}
+
+\newenvironment{clmpf}{
+    {\noindent{\it \textbf{Dimostrazione del Claim.}}}
+    \tcolorbox[blanker,breakable,left=5mm,parbox=false,
+    before upper={\parindent15pt}, after skip=10pt,
+    borderline west={1mm}{0pt}{clmscol!40!white}]
+}{
+    \textcolor{clmscol!40!white}{\hbox{}\nobreak\hfill$\blacksquare$}
+    \endtcolorbox
+}
+\NewDocumentCommand{\clmp}{m+m+m}{
+    \begin{myclaim*}{#1}{}#2\end{myclaim*}
+    \begin{clmpf}#3\end{clmpf}
+}
+
+% ============================
+% Fatto
+% ============================
+\newtcbtheorem[use counter from=mydefinition]{myfact}{Fatto}{
+    enhanced, frame hidden, titlerule=0mm, toptitle=1mm, bottomtitle=1mm,
+    fonttitle=\bfseries\large, coltitle=black,
+    colbacktitle=facscol!40!white, colback=facscol!20!white,
+}{fact}
+\NewDocumentCommand{\fact}{+m}{\begin{myfact}{}{}#1\end{myfact}}
+
+% ============================
+% Dimostrazione semplice
+% ============================
+\NewDocumentCommand{\pf}{+m}{
+    \begin{proof}[\noindent\textbf{Dimostrazione.}]#1\end{proof}
+}
+
+% ============================
+% Esempio (box)
+% ============================
+\newenvironment{myexample}{
+    \tcolorbox[blanker,breakable,left=5mm,parbox=false,
+    before upper={\parindent15pt}, after skip=10pt,
+    borderline west={1mm}{0pt}{clmscol!40!white}]
+}{
+    \textcolor{clmscol!40!white}{\hbox{}\nobreak\hfill$\blacksquare$}
+    \endtcolorbox
+}
+\NewDocumentCommand{\exm}{m+m}{
+    \begin{myexample}
+    {\noindent{\it \textbf{Dimostrazione: #1}}}\\
+        #2
+    \end{myexample}
+}
+
+% ============================
+% Remark / Spiegazione
+% ============================
+\NewDocumentCommand{\rmk}{+m}{
+    {\it \color{rmkscol!40!white}#1}
+}
+\newenvironment{remark}{
+    \par\vspace{5pt}
+    {\par\noindent{\textbf{Spiegazione.}}}
+    \tcolorbox[blanker,breakable,left=5mm,
+    before skip=10pt,after skip=10pt,
+    borderline west={1mm}{0pt}{rmkscol!20!white}]
+}{
+    \endtcolorbox
+    \vspace{5pt}
+}
+\NewDocumentCommand{\rmkb}{+m}{\begin{remark}#1\end{remark}}
+
+% --- Comandi extra ---
+\makeatletter
+\newcommand{\impliesleft}{\mathrel{\mathpalette\implies@left\relax}}
+\newcommand{\implies@left}[2]{\reflectbox{$\m@th#1\implies$}}
+\makeatother
+
+% --- Titlepage personalizzata (sovrascrive \maketitle di Quarto) ---
+\renewcommand{\maketitle}{%
+  \begin{titlepage}
+    \vspace*{\fill}
+    \centering
+    {\LARGE \textbf{Basi di Dati — Modulo 2}\par}
+    \vspace{1cm}
+    {\Large Anno Accademico 2025-2026\par}
+    \vspace{1cm}
+    {\normalsize Dispensa a cura di\\[2mm] Ibrahima Tely Barry \par}
+    \vspace*{\fill}
+  \end{titlepage}
+}

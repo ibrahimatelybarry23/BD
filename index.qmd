@@ -1,0 +1,7 @@
+# Prefazione {.unnumbered}
+
+Appunti del corso di **Basi di Dati — Modulo 2**.
+
+Questi appunti coprono gli argomenti del secondo modulo del corso, tra cui:
+
+- **normalizzazione**

@@ -1,0 +1,28 @@
+# Teoria della normalizzazione  
+\intro{}
+
+
+## Introduzione 
+Come qualsiasi sistema di modellazione anche il modello relazionale permette di rappresentare la stessa informazione in più modi differenti. Questo solleva due domande fondamentali:
+
+-  quando una rappresentazione è di buona qualità?
+-   quando due diverse rappresentazioni sono equivalenti?
+
+La teoria della normalizzazione nasce proprio per rispondere a queste due domande, formalizzando i criteri con cui valutare e confrontare schemi relazionali.
+
+### Qualità degli Schemi Relazionali
+Per capire cosa si intende per “buona qualità“ consideriamo una relazione che registra i prestiti di una biblioteca:
+
+| NomeUtente       | Telefono | CodiceLibro | Titolo     | Data  |
+| ---------------- | -------- | ----------- | ---------- | ----- |
+| Rossi Carlo      | 75444    | XY188A      | Decameron  | 07-07 |
+| Pastine Maurizio | 66133    | XY090C      | Canzoniere | 01-08 |
+| Paolicchi Laura  | 59729    | XY101A      | Vita Nova  | 05-08 |
+| Paolicchi Luca   | 59729    | XY701B      | Adelchi    | 14-01 |
+| Paolicchi Luca   | 59729    | XY008C      | Amleto     | 17-08 |
+
+
+Osservando questa tabella si notano subito due problemi principali: 
+
+- **Rindondanza dei dati**: per gli utenti che hanno più di un libro in prestito  (come Paolicchi Luca), le informazioni anagrafiche come il numero di telefono vengono replicate in ogni riga.
+- **Scarsa espressività**:lo schema permette di rappresentare solo gli utenti che hanno almeno un libro in prestito; non è possibile registrare un utente senza associargli un libro.

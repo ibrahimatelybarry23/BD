@@ -1,0 +1,35 @@
+project:
+  type: book
+  output-dir: _book
+
+book:
+  title: "Basi di Dati — Modulo 2"
+  author: "Ibrahima Tely Barry"
+  date: today
+  chapters:
+    - index.qmd
+    - normalizzazione.qmd
+
+bibliography: references.bib
+
+filters:
+  - bordered-tables.lua
+
+format:
+  pdf:
+    documentclass: book
+    classoption: [a4paper, 12pt, twoside]
+    geometry:
+      - top=2.5cm
+      - bottom=2.5cm
+      - left=3cm
+      - right=2.5cm
+    colorlinks: true
+    linkcolor: NavyBlue
+    urlcolor: NavyBlue
+    toc: true
+    toc-depth: 3
+    number-sections: true
+    lang: it
+    include-in-header:
+      - preamble.tex
