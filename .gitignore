@@ -21,12 +21,16 @@ rad.json
 *.flf
 #Test results file
 TestResults.xml
+
+### Quarto ###
 /.quarto/
 /_book/
 **/*.quarto_ipynb
-.claude/
 *_files/
 *.ptc
 *.tex
 !preamble.tex
 !titlepage.tex
+
+### Claude ###
+.claude/
