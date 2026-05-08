@@ -24,7 +24,8 @@ TestResults.xml
 
 ### Quarto ###
 /.quarto/
-/_book/
+/_book/*
+!/_book/*.pdf
 **/*.quarto_ipynb
 *_files/
 *.ptc
